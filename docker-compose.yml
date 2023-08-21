@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: python-app
+    image: ocastano/python-app
+    volumes:
+      - .:/app
+    environment:
+      - MODEL=cardiffnlp/twitter-roberta-base-sentiment-latest
+    ports:
+      - 8000:8000
+
+volumes:
+  python-app:
+    external: false

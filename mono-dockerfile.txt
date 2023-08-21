@@ -1,0 +1,22 @@
+#Buid for multiple-platforms
+#FROM --platform=$BUILDPLATFORM python:3.9.0-slim
+#FROM --platform=linux/amd64/v2 python:3.9.0-slim
+FROM python:3.9.0-slim
+
+# cd app
+WORKDIR /app
+
+# expose port
+EXPOSE 8000
+
+# copy local folders to container
+COPY app.py test_app.py pyproject.toml ./
+
+# execute shell comands
+RUN pip install --upgrade pip && pip install poetry
+RUN poetry install
+RUN poetry run pytest
+RUN poetry remove pytest && rm -f test_app.py
+
+# Run commands on the shell
+CMD ["poetry", "run", "python", "app.py" ]

@@ -25,7 +25,6 @@ jobs:
         major_pattern: "major:"
         # Same as above except indicating a minor change, supports regular expressions wrapped with '/'
         minor_pattern: "minor:"
-
         patch_pattern: "patch:"
         # A string to determine the format of the version output
         format: "${major}.${minor}.${patch}-prerelease${increment}"

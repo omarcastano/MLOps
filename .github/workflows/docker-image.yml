@@ -39,14 +39,14 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
         echo $NEW_VERSION
     
-#    - name: Build Docker Image
-#      NEW_VERSION: ${{ steps.version.outputs.version }}
-#      run: |
-#        docker build -t ocastano/sentiment-analysis-app:$NEW_VERSION .
-#        docker build -t ocastano/sentiment-analysis-app:latest .
+    - name: Build Docker Image
+      NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker build -t ocastano/sentiment-analysis-app:$NEW_VERSION .
+        docker build -t ocastano/sentiment-analysis-app:latest .
     
-#    - name: Push Docker Image
-#      NEW_VERSION: ${{ steps.version.outputs.version }}
-#      run: |
-#        docker push ocastano/sentiment-analysis-app:$NEW_VERSION
-#        docker push ocastano/sentiment-analysis-app:latest
+    - name: Push Docker Image
+      NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker push ocastano/sentiment-analysis-app:$NEW_VERSION
+        docker push ocastano/sentiment-analysis-app:latest

@@ -1,5 +1,4 @@
-import pytest
-from app.app import app
+from src.app import app
 from fastapi.testclient import TestClient
 
 

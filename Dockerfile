@@ -4,7 +4,7 @@ FROM python:3.9.0-slim AS test_app
 # move to working directory
 WORKDIR /app
 
-COPY app.py pyproject.toml test_app.py ./
+COPY . ./
 
 # install dependences
 RUN pip install --upgrade pip && pip install poetry
@@ -17,7 +17,7 @@ FROM python:3.9.0-slim AS runner
 WORKDIR /app
 
 COPY --from=test_app /app/poetry.lock ./
-COPY app.py pyproject.toml ./
+COPY . ./
 
 RUN pip install --upgrade pip && pip install poetry
 RUN poetry install --only main
@@ -27,4 +27,4 @@ EXPOSE 8000
 
 # Run commands on the shell
 #CMD ["poetry", "run", "python", "app.py", "--model", "${MODEL}"]
-CMD poetry run python app.py --model=${MODEL}
+CMD poetry run python src/app.py --model=${MODEL}

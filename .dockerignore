@@ -1,2 +1,8 @@
 Dockerfile
 .dockerignore
+__pycache__/
+.pytest_cache/
+.gitignore
+*.txt
+docker-compose.yml
+poetry.lock

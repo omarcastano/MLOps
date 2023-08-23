@@ -17,6 +17,7 @@ jobs:
       uses: actions/checkout@v3
       with: 
         fetch-depth: 0 
+
     - name: Docker login
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
@@ -24,3 +25,11 @@ jobs:
       run: |
         echo "Init Login..."
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    
+    - name: Build Docker Image
+      run: |
+        docker build -t ocastano/sentiment-analysis-app:0.0.2 .
+    
+    - name: Push Docker Image
+      run: |
+        docker push ocastano/sentiment-analysis-app:0.0.2

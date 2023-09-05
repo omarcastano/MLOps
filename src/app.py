@@ -5,14 +5,13 @@ import nest_asyncio
 from argparse import ArgumentParser
 
 arg_parser = ArgumentParser()
-arg_parser.add_argument("--model", default="cardiffnlp/twitter-roberta-base-sentiment-latest", help="model name")
+arg_parser.add_argument("--model", default="", help="")
 
 # parse arguments
 args = arg_parser.parse_args()
 
 # import model from hugging face
 model = pipeline(model=args.model)
-
 
 ## Deploying the model using fastAPI
 app = FastAPI()

@@ -6,3 +6,4 @@ __pycache__/
 *.txt
 docker-compose.yml
 poetry.lock
+src/data/

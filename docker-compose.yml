@@ -1,17 +1,33 @@
 version: '3'
 
 services:
-  app:
+  maria_db:
+    container_name: mariadb
+    image: mariadb:jammy
+    volumes:
+      - ./src/data:/docker-entrypoint-initdb.d
+    environment:
+      - MARIADB_DATABASE=datasets
+      - MARIADB_USER=omar.castano
+      - MARIADB_PASSWORD=123
+      - MARIADB_ROOT_PASSWORD=123
+    ports:
+      - 3306:3306
+
+  python_app:
+    depends_on:
+      - maria_db
     build:
       context: .
       dockerfile: Dockerfile
 
     container_name: python-app
-    image: ocastano/python-app
-    volumes:
-      - .:/app
+    image: ocastano/python-training-app
     environment:
-      - MODEL=cardiffnlp/twitter-roberta-base-sentiment-latest
+      - DATASET=iris
+      - NUM_INPUT_FEATURES=sepal_length
+      - CAT_INPUT_FEATURES=None
+      - TARGET_VAR=species
     ports:
       - 8000:8000
 
